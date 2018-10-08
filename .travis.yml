@@ -1,0 +1,29 @@
+
+sudo: false
+
+branches:
+   only:
+    - master
+    - release
+
+language: python
+
+python:
+ - 2.7
+ - 3.5
+
+install: '[ "$TRAVIS_BRANCH" = release ] || pip install -U tox-travis'
+
+script: '[ "$TRAVIS_BRANCH" = release ] || tox'
+
+deploy:
+   provider: pypi
+   user: norioxkimura
+   password:
+      secure: "a/oXr6s5jbU/gQliqrTnSIjGpd8V603R4PfPe3x8U2kaNS9DMpNeOqks1H76nB3oWNas2yFfp+FE2dyRldUp2V7smCsJD15kY5zoHBWZbDd6N3ZUVbQnDtHghkZNqtnwy1FYFMbH9UEFMXsI7R2NVPxPuey6SPzJER/QHsRr+5+PvicnJ+KTRFql9JCMhglISUhQuOa+HAeDNP2dEKVTeX9Yc8sMkdgZ/MyLwofNb0Fw7AzXosKpjsW6X9oXe1yc8ZsgFuMgfyKi+OgZecXGuaY4DZJjiw0ipA9smUUWeVNztQp4TA6WVlzq5SJ+hY0tpsUR3B/b6RhN24ZaLfP+fOO4jEzghV9dpnVFkv3FjA//aB2VkvFDgkLmcu8uSHhkMTtfKuUG7D/N6+YHa3yvlTbOnrdw2M/RIRVwJxYx9WJVyqH4jGDxNjWmPAALOpX5EKlpQUN5/NgGFMPzgYisUdodv2Ke3/B1vIQDWaCnOGUzM//Rx6hSkqZv5q0nLU6mvubsUWlYJQq8aIWqpZ2e5j++YZ4ZeWGBViXNKKov9jULy0ahqp+rLaybaoEYRX9uG56WBBh/SJkntbnkY+4f7ELYN+w81qnk3FQlf7WXrTG8j2KJ1oEMM+qjxiTqljUMxapZYWJgaMnUx8Cm8Chmt/m0aXeTgxrI8wSCfB4uv0I="
+   distributions: sdist bdist_wheel
+   skip_cleanup: true
+   on:
+      python: 2.7
+      branch: release
+
